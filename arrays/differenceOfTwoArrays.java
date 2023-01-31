@@ -1,32 +1,54 @@
-package arrays;
+ package arrays;
 import java.util.Scanner;
 
 public class differenceOfTwoArrays {
 
-    public static int differenceCalculator(int arr1[], int arr2[], int n1, int n2)
+    public static int[] differenceCalculator(int arr1[], int arr2[], int n1, int n2)
     {
+
+        //Starting from last digit
         int i = n1-1;
         int j = n2-1;
-        //int result = 0;
-        int difference = 0;
+
+        //Storing the difference in the array 
+        int diff[] = new int[n2];
+        int k = diff.length-1;
         int borrow = 0;
-        while(i > 0 || j > 0)
+        
+        //Subtracting and Adding it to difference array
+        int i2 = 0;
+        while(k >= 0)
         {
-            if (arr1[i] - borrow <= arr2[j] ) 
+            int difference = 0;
+            //Since array one is smaller
+            //Index should be updated to 0
+            //Else it will cause array out of bound of exception
+            if(i >= 0)
             {
-                difference = (arr2[j] - borrow) - arr1[i];
+                i2 = arr1[i];
+            }
+            else{
+                i2 = 0;
+            }
+
+            //Subtraction
+            if(arr2[j] - borrow >= i2)
+            {
+                difference = arr2[j] - i2;
                 borrow = 0;
-            } 
-            else 
+            }
+            else
             {
-                difference = ((arr2[j] + 10) - borrow) - arr1[i];
+                difference = arr2[j] + 10 - borrow;
                 borrow = 1;
             }
-            System.out.println(difference);
+
+            diff[k] = difference;
             i--;
             j--;
+            k--;
         }
-        return 0;
+        return diff;
     }
     public static void main(String[] args) {
 
@@ -52,8 +74,10 @@ public class differenceOfTwoArrays {
         }
 
         //Calling The Function
-        int diff = differenceCalculator(arr1, arr2, n1, n2);
-        System.out.println("Difference Between Two Numbers is : "+diff);
+        int diff[] = differenceCalculator(arr1, arr2, n1, n2);
+        for (int i = 0; i < diff.length; i++) {
+            System.out.print("--->"+diff[i]);
+        }
         sc.close();
     }
 }
