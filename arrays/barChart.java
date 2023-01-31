@@ -19,7 +19,7 @@ public class barChart {
             for (int j = 0; j < n; j++) {
                 if(max - arr[j] <= i)
                 {
-                    System.out.print("****\t");
+                    System.out.print("*\t");
                 }
                 else{
                     System.out.print("\t");
