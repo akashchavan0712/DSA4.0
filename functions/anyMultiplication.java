@@ -1,4 +1,4 @@
-package functions;
+  package functions;
 import java.util.Scanner;
 //Let's Divide the multiplication procedure base on its functions
 //Step 1: Extracting the last digits of both numbers and multiplying them with each other
