@@ -2,7 +2,7 @@ package arrays;
 
 import java.util.Scanner;
 
-public class sumOfTwoArrays1 {
+public class sumOfTwoArrays {
 
     public static int[] arrayAddition(int arr1[], int arr2[], int m, int n)
     {
