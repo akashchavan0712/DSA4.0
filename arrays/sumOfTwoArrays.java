@@ -1,45 +1,43 @@
 package arrays;
+
 import java.util.Scanner;
 
-public class sumOfTwoArrays {
+public class sumOfTwoArrays1 {
 
-    public static void addingArrays(int arr1[], int arr2[], int n1, int n2)
+    public static int[] arrayAddition(int arr1[], int arr2[], int m, int n)
     {
-        //Finding the larger array size
-        int max = 0;
-        if(n1 > n2)
-        {
-            max = n1;
-        }
-        else{
-            max = n2;
-        }
+        //Creating array of size maxSize+1 
+        int maxSize = m > n ? m : n;
+        int arr3[] = new int[maxSize+1];
 
-        //Creating Solution Array for storing addition of two numebrs
-        int arr3[] = new int[max+1];
-
-        int i = n1 - 1;
-        int j = n2 - 1;
-        int k = arr3.length -1;
+        //Declaring the necessary variables
+        int i = m-1;
+        int j = n-1;
+        int k = maxSize; 
         int sum = 0;
         int carry = 0;
+        int rem = 0;
         
-        //Now Performing the additions
-        while(i >= 0 || j >= 0)
+        //Iterating and creating new array
+        while(k >= 0)
         {
-            int add = 0;
+            sum = carry;
+
             if(i >= 0)
             {
-                add += arr1[i];
+                sum = sum + arr1[i];
             }
             if(j >= 0)
             {
-                add += arr2[j];
+                sum = sum + arr2[j];
             }
 
-            sum = add % 10;
-            carry = add / 10;
-            arr3[k] = sum;
+            //Getting Carry and Remainder
+            carry = sum / 10;
+            rem = sum % 10;
+
+            //Adding to addition array
+            arr3[k] = rem;
 
             i--;
             j--;
@@ -48,49 +46,46 @@ public class sumOfTwoArrays {
 
         if(carry > 0)
         {
-            System.out.print(carry);
+            arr3[k] = carry;
         }
 
-        //Printing The Third Array
-        for(int x = 0; x < arr3.length; x++)
-        {
-            if(x == 0 && arr3[x] == 0)
-            {
-                continue;
-            }
-            System.out.print(arr3[x]);
-        }
+        return arr3;
+    } 
+    public static void main(String[] args) 
+    {
+        Scanner sc = new Scanner(System.in);
 
-    }
+        System.out.print("Please enter the size of the array1 : ");
+        int m = sc.nextInt();
 
-    public static void main(String[] args) {
+        System.out.print("Please enter the size of the array2 : ");
+        int n = sc.nextInt();
 
-        //Taking Inputs the array sizes of two arrays
-        Scanner sc =  new Scanner(System.in);
-        System.out.println("Enter The Size Of The Array1 : ");
-        int n1 = sc.nextInt();
-        System.out.println("Enter The Size Of The Array2 : ");
-        int n2 = sc.nextInt();
+        //Creating two arrays of size m and n;
+        int arr1[] = new int[m];
+        int arr2[] = new int[n];
 
-        //Creating Arrays of the given length
-        int arr1[] = new int[n1];
-        int arr2[] = new int[n2];
-
-        //Taking Actual Inputs in Array1
-        for (int i = 0; i < n1; i++) {
+        System.out.println("Enter the "+m+" elements for the array1 : ");
+        for (int i = 0; i < m; i++) {
             arr1[i] = sc.nextInt();
         }
 
-        //Taking Actual Inputs in Array2
-        for(int i = 0; i < n2; i++)
-        {
+        System.out.println("Enter the "+n+" elements for the array2 : ");
+        for (int i = 0; i < n; i++) {
             arr2[i] = sc.nextInt();
         }
 
-        //Calling the addition function
-        addingArrays(arr1, arr2, n1, n2);
-        sc.close();
+        int arr3[] = arrayAddition(arr1,arr2,m,n);
 
+        for (int i = 0; i < arr3.length; i++) {
+            if(i == 0 && arr3[i] == 0)
+            {
+                continue;
+            }
+            System.out.print(arr3[i]);
+        }
+
+        sc.close();
 
     }
 }
