@@ -14,7 +14,7 @@ public class differenceOfTwoArrays1 {
         int difference = 0;
         int borrow = 0;
         int num1 = 0, num2 = 0;
-        while(i >= 0 && j >= 0 && borrow >= 0)
+        while(k >= 0)
         {
             if(i >= 0)
             {
@@ -24,23 +24,23 @@ public class differenceOfTwoArrays1 {
             {
                 num2 = arr2[j];
             }
-            if(num2 > num1)
+            if(j < 0)
             {
-                difference = (num1 + 10) - borrow - num2;
-                borrow = 1;
+                num2 = 0;
+            }
+            if((num1 + borrow) < num2)
+            {
+                difference = (num1 + 10) + borrow - num2;
+                borrow = -1;
             }
             else{
-                difference = (num1 - borrow) - num2;
+                difference = (num1 + borrow) - num2;
                 borrow = 0;
             }
             arr3[k] = difference;
             k--;
             j--;
             i--;
-        }
-        if(borrow != 0 || num1 > 0)
-        {
-            arr3[k] = num1 - borrow;
         }
         return arr3;
     }
@@ -70,10 +70,6 @@ public class differenceOfTwoArrays1 {
         int arr3[] = differenceOfTwoArrays(arr1,arr2,m,n);
 
         for (int i = 0; i < arr3.length; i++) {
-            // if(i == 0 && arr3[i] == 0)
-            // {
-            //     continue;
-            // }
             System.out.print(arr3[i]);
         }
 
